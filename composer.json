@@ -1,0 +1,12 @@
+{
+    "name": "yogui/ioet",
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "authors": [
+        {
+            "name": "yordankis",
+            "email": "yordankis2001@gmail.com"
+        }
+    ]
+}
