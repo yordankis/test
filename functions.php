@@ -1,12 +1,13 @@
 <?php
+
 /**
  * It returns the content of a file.
- *
- * @param filename The name of the file you want to read.
- *
- * @return The file contents as an string array.
+ * 
+ * @param string filename The name of the file to read.
+ * 
+ * @return array|bool the content of the file or false in case of error.
  */
-function get_file_content($filename)
+function get_file_content(string $filename)
 {
     if (file_exists($filename)) {
         return file($filename);
@@ -15,15 +16,16 @@ function get_file_content($filename)
     }
 }
 
+
 /**
  * It takes a string of comma separated values, each value being a day of the week and a time range,
- * and returns the salary for that week.
- *
- * @param employee_data a string containing the employee's work schedule.
- *
- * @return The salary for the employee.
+ * and returns the total salary for that week
+ * 
+ * @param string employee_data a string containing the employee's data for the week.
+ * 
+ * @return int|bool The salary of the employee or false in case of error.
  */
-function calculate_salary($employee_data)
+function calculate_salary(string $employee_data)
 {
     $days_of_week = ['MO' => 1, 'TU' => 1, 'WE' => 1, 'TH' => 1, 'FR' => 1, 'SA' => 2, 'SU' => 2];
     $hour_value_data = [
@@ -31,9 +33,12 @@ function calculate_salary($employee_data)
         '2' => ['0' => '', '9' => 30, '18' => 20, '24' => 25],
     ];
     $salary = 0;
-    $dayly_data = explode(',', $employee_data);
-    foreach ($dayly_data as $data) {
+    $daily_data = explode(',', $employee_data);
+    foreach ($daily_data as $data) {
         $day = substr($data, 0, 2);
+        if (!in_array($day,array_keys($days_of_week))) {
+            return false;
+        }
         $keys = array_keys($hour_value_data[$days_of_week[$day]]);
         if (!in_array($day, $keys)) {
             return false;
@@ -61,14 +66,14 @@ function calculate_salary($employee_data)
 }
 
 /**
- * It takes an array of strings, each of which is a line of input, and for each line, it splits the
- * line into two parts, the name and the work data, and then it calculates the salary for the work data
- * and prints the name and salary
- *
- * @param data an array of strings, each of which represents a line of input.
+ * It takes an array of strings, each string is a line of data, and returns an array of arrays, each
+ * array is a line of data with either an error or a name and salary.
+ * 
+ * @param array data The data to be processed.
+ * 
+ * @return An array of arrays.
  */
-
-function process($data)
+function process(array $data)
 {
     $result = [];
     foreach ($data as $line) {
@@ -95,13 +100,14 @@ function process($data)
     return $result;
 }
 
+
 /**
- * If the results are not an array, exit. Otherwise, loop through the results and print the name and
- * salary of each employee. If there is an error, print the error.
- *
- * @param results The array of results from the function.
+ * If the results are not an array, exit. Otherwise, loop through the results and if there's an error,
+ * print it. Otherwise, print the name and salary
+ * 
+ * @param array results An array of results from the function.
  */
-function print_result($results)
+function print_result(array $results)
 {
     if (!is_array($results)) {
         exit;

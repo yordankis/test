@@ -10,8 +10,5 @@ final class GetFileContentTest extends TestCase
         $this->assertEquals(['1'], get_file_content('tests/test.txt'),'Invalid File');
         $this->assertEquals(false, get_file_content('tests/test1.txt'),'Missing File');
     }
-
-    /**
-     */
 }
 ?>
