@@ -1,12 +1,17 @@
 <?php
-require_once '../vendor/autoload.php';
-require_once('../functions.php');
+declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-class Test extends TestCase
+require_once('functions.php');
+
+final class GetFileContentTest extends TestCase
 {
     public function testGetFileContent()
     {
-        $this->assertEquals('test', get_file_content('test.txt'));
+        $this->assertEquals(['1'], get_file_content('tests/test.txt'),'Invalid File');
+        $this->assertEquals(false, get_file_content('tests/test1.txt'),'Missing File');
     }
+
+    /**
+     */
 }
 ?>

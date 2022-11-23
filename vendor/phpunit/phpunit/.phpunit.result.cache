@@ -1,0 +1,1 @@
+{"version":1,"defects":{"TestFunctions::testGetFileContent":4,"TestGetFileContent::testGetFileContent":4,"GetFileContentTest::testGetFileContent":3},"times":{"TestFunctions::testGetFileContent":0.005,"TestGetFileContent::testGetFileContent":0.005,"GetFileContentTest::testGetFileContent":0.005}}
